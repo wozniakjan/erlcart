@@ -1,0 +1,43 @@
+Name: erlang
+Cartridge-Short-Name: ERL
+Display-Name: Erlang Cartridge
+Description: erlang cartridge usable with Cowboy webserver
+Version: '0.1'
+License: ASL 2.0
+Vendor: redhat
+Cartridge-Version: 0.0.1
+Cartridge-Vendor: wj 
+Categories:
+- service
+- web_framework
+Provides:
+- erlang v17r1
+- rebar
+Cart-Data:
+- Key: OPENSHIFT_ERLANG_EXAMPLE
+  Type: environment
+  Description: An example environment variable using ERB processing
+Publishes:
+Subscribes:
+  set-env:
+    Type: ENV:*
+    Required: false
+Endpoints:
+- Private-IP-Name: IP
+  Private-Port-Name: PORT
+  Private-Port: 8080
+  Public-Port-Name: PROXY_PORT
+  Protocols: [http, ws]
+  Options:
+    primary: true
+  Mappings:
+  - Frontend: ''
+    Backend: ''
+    Options:
+      websocket: true
+Scaling:
+  Min: 1
+  Max: -1
+Metrics:
+- uptime
+Source-Url: https://github.com/wozniakjan/erlcart.git

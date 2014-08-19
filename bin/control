@@ -1,0 +1,71 @@
+#!/bin/bash -eu
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+export PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
+
+function start {
+  build
+  cd $OPENSHIFT_REPO_DIR
+  if [ -f start.sh ]; then
+      echo "Starting Erlang cartridge"
+      nohup ./start.sh &
+  fi
+}
+
+function stop {
+  cd $OPENSHIFT_REPO_DIR
+  if status; then
+      echo "Stopping Erlang cartridge"
+      kill -9 $(/sbin/pidof beam.smp)
+  fi
+}
+
+function restart {
+  stop
+  start
+}
+
+function status {
+  local pid=$(/sbin/pidof beam.smp)
+  if [ "$pid" != "" ]; then
+    echo "Erlang Status Running"
+    return 0
+  fi
+  echo "Erlang Status Not-Running"
+  return 1
+}
+
+function build {
+  cd $OPENSHIFT_REPO_DIR
+  if [ -f rebar.config ]; then
+      echo "Building Erlang application"
+      rebar get-deps && rebar compile
+      echo "Application succesfully built"
+  fi
+}
+
+function catchall {
+  return 0
+}
+
+case "$1" in
+  start)                start ;;
+  stop)                 stop ;;
+  restart)              restart ;;
+  status)               status ;;
+  reload)               catchall ;;
+  tidy)                 catchall ;;
+  pre-build)            catchall ;;
+  build)                build ;;
+  deploy)               catchall ;;
+  post-deploy)          catchall ;;
+  pre-snapshot)         catchall ;;
+  post-snapshot)        catchall ;;
+  pre-restore)          catchall ;;
+  post-restore)         catchall ;;
+  pre-repo-archive)     catchall ;;
+  update-configuration) catchall ;;
+  *)           exit 0
+esac
+
+exit 0

@@ -1,0 +1,14 @@
+{application, test,
+ [
+  {description, ""},
+  {vsn, "0.0.1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  cowboy,
+                  ranch
+                 ]},
+  {mod, { test_app, []}},
+  {env, [{http_port, 8080}]}
+ ]}.
