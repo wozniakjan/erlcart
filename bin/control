@@ -18,8 +18,6 @@ function restart {
 
 function status {
   client_result "This is client status output from the mock cartridge"
-  touch $MOCK_STATE/control_status
-  [ -f $MOCK_STATE/mock_process ]
 }
 
 function build {
