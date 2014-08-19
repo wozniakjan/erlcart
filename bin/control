@@ -1,0 +1,55 @@
+#!/bin/bash -eu
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+source $OPENSHIFT_MOCK_DIR/mock.conf
+
+function start {
+  echo "Starting Erlang cartridge"
+}
+
+function stop {
+  echo "Stopping Mock cartridge"
+}
+
+function restart {
+  stop
+  start
+}
+
+function status {
+  client_result "This is client status output from the mock cartridge"
+  touch $MOCK_STATE/control_status
+  [ -f $MOCK_STATE/mock_process ]
+}
+
+function build {
+  echo "Building erlang cartridge"
+  
+  echo "erlang successfully built."
+}
+
+function catchall {
+    echo "not yet implemented"
+}
+
+case "$1" in
+  start)                start ;;
+  stop)                 stop ;;
+  restart)              restart ;;
+  status)               status ;;
+  reload)               catchall ;;
+  tidy)                 catchall ;;
+  pre-build)            catchall ;;
+  build)                build ;;
+  deploy)               catchall ;;
+  post-deploy)          catchall ;;
+  pre-snapshot)         catchall ;;
+  post-snapshot)        catchall ;;
+  pre-restore)          catchall ;;
+  post-restore)         catchall ;;
+  pre-repo-archive)     catchall ;;
+  update-configuration) catchall ;;
+  *)           exit 0
+esac
+
+exit 0

@@ -1,0 +1,6 @@
+#!/bin/bash -eu
+# Simple web server for testing
+
+MOCK_STATE=$OPENSHIFT_DATA_DIR/.mock_cartridge_state
+touch $MOCK_STATE/action_hook_pre_stop
+
