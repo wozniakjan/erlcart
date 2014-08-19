@@ -1,7 +1,6 @@
 #!/bin/bash -eu
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
-source $OPENSHIFT_MOCK_DIR/mock.conf
 
 function start {
   echo "Starting Erlang cartridge"
