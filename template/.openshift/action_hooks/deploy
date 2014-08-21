@@ -1,5 +1,6 @@
 #!/bin/bash -eu
 
-if [ -f $OPENSHIFT_DEPLOYMENTS_DIR/current/repo/start.sh ]; then
+cd $OPENSHIFT_DEPLOYMENTS_DIR/current/repo;
+if [ -f start.sh ]; then
     ./start.sh
 fi
