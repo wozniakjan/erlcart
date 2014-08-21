@@ -16,7 +16,7 @@ function restart {
 }
 
 function status {
-  client_result "This is client status output from the mock cartridge"
+  client_result "This is client status output from the erlang cartridge"
 }
 
 function build {
