@@ -5,10 +5,6 @@ PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
 
 function start {
   echo "Starting Erlang cartridge"
-  cd $OPENSHIFT_DEPLOYMENTS_DIR/current/repo;
-  if [ -f start.sh ]; then
-      ./start.sh
-  fi
 }
 
 function stop {
@@ -26,10 +22,6 @@ function status {
 
 function build {
   echo "Building erlang cartridge"
-  cd $OPENSHIFT_DEPLOYMENTS_DIR/current/repo;
-  if [ -f rebar.config ]; then
-      rebar get-deps && rebar compile
-  fi
   echo "erlang successfully built."
 }
 
