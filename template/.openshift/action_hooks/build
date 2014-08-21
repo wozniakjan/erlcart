@@ -1,5 +1,6 @@
 #!/bin/bash -eu
 
+export PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
 cd $OPENSHIFT_REPO_DIR
 if [ -f rebar.config ]; then
     rebar get-deps && rebar compile

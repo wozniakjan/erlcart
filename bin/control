@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
-PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
+export PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
 
 function start {
   echo "Starting Erlang cartridge"
