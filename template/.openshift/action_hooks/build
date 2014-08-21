@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/bash -eu
+
 if [ -f $OPENSHIFT_DEPLOYMENTS_DIR/current/repo/rebar.config ]; then
     rebar get-deps && rebar compile
 fi
