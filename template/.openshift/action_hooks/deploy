@@ -3,5 +3,5 @@
 export PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
 cd $OPENSHIFT_REPO_DIR
 if [ -f start.sh ]; then
-    ./start.sh
+    nohup ./start.sh
 fi
