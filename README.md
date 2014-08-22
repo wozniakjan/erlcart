@@ -12,12 +12,12 @@ What this cartridge currently offers?
 
 What it supports?
 -----------------
-currently cartridge has been tested with [Cowboy web server](https://github.com/ninenines/cowboy), thanks to uniform OTP development and file structure, it is assumed that any web server following OTP principles is supported as well
+Currently cartridge has been tested with [Cowboy web server](https://github.com/ninenines/cowboy), thanks to uniform OTP development and file structure, it is assumed that any web server following OTP principles is supported as well.
 
 How do I create the application?
 --------------------------------
 Create the application in [OpenShift](www.openshift.com), add [manifest](https://raw.githubusercontent.com/wozniakjan/erlcart/master/metadata/manifest.yml) from this repository, clone applications repository and push your OTP application's code. The cartridge will take care of automated build and deployment. In case you are not familiar with Cowboy and web development in OTP, there is barebone app created for your convenience in
-[/template/test\_app](http://github.com/wozniakjan/erlcart/tree/master/template/test_app).
+[/template/test\_app](#todo).
 
 Are there any examples running around?
 --------------------------------------
@@ -30,4 +30,4 @@ Apart from others, there are two apps running:
 
 That's it?
 ----------
-yep
+yep.
