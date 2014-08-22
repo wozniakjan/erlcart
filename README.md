@@ -16,11 +16,13 @@ currently cartridge has been tested with [Cowboy web server](https://github.com/
 
 How do I create the application?
 --------------------------------
-Create the application in [OpenShift](www.openshift.com), add [manifest](https://raw.githubusercontent.com/wozniakjan/erlcart/master/metadata/manifest.yml) from this repository, clone applications repository and push your OTP application's code. The cartridge will take care of automated build and deployment. In case you are not familiar with Cowboy and web development in OTP, there is barebone app created for your convenience in /template/test\_app.
+Create the application in [OpenShift](www.openshift.com), add [manifest](https://raw.githubusercontent.com/wozniakjan/erlcart/master/metadata/manifest.yml) from this repository, clone applications repository and push your OTP application's code. The cartridge will take care of automated build and deployment. In case you are not familiar with Cowboy and web development in OTP, there is barebone app created for your convenience in
+[/template/test\_app](http://github.com/wozniakjan/erlcart/tree/master/template/test_app).
 
 Are there any examples running around?
 --------------------------------------
-Apart from others, there are two apps running.
+Apart from others, there are two apps running:
+
 1) test application from /template/test\_app
 http://mynewcart-wozj.rhcloud.com/
 
