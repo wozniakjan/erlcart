@@ -1,0 +1,6 @@
+#!/bin/bash -eu
+
+cd $OPENSHIFT_REPO_DIR
+if [ -f pid.txt ]; then
+    kill -KILL $(cat pid.txt)
+fi
