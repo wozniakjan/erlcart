@@ -23,10 +23,10 @@ Are there any examples running around?
 --------------------------------------
 Apart from others, there are two apps running:
 
-1) test application from /template/test\_app
-http://mynewcart-wozj.rhcloud.com/
+1) (test)[http://mynewcart-wozj.rhcloud.com/] application from /template/test\_app
 
-2) HTML5 based web video conference - which is more proof of concept than actuall application, work is in progress and far from being finished, but hopefully testable.
+
+2) (camchat)[#todo] HTML5 based web video conference (which is more proof of concept than actuall application, work is in progress and far from being finished, but hopefully testable)
 
 That's it?
 ----------
