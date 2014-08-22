@@ -3,5 +3,6 @@
 export PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
 cd $OPENSHIFT_REPO_DIR
 if [ -f start.sh ]; then
-    nohup ./start.sh
+    nohup ./start.sh &
+    echo $! > pid.txt
 fi
