@@ -15,9 +15,8 @@ function start {
 function stop {
   echo "Stopping Erlang cartridge"
   cd $OPENSHIFT_REPO_DIR
-  pwd
-  if [ -f pid.txt ]; then
-      kill -KILL $(cat pid.txt)
+  if [ status ]; then
+      kill $(cat pid.txt)
   fi
 }
 
@@ -28,8 +27,11 @@ function restart {
 
 function status {
   if [ -f pid.txt ]; then
-      kill -0 $(cat pid.txt)
-      return $?
+      local pid=$(cat pid.txt)
+      local stat=$(ps $pid | grep $pid)
+      if [ "$stat" != "" ]
+          return 0
+      fi
   fi
   return 1
 }
