@@ -5,10 +5,19 @@ export PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
 
 function start {
   echo "Starting Erlang cartridge"
+  cd $OPENSHIFT_REPO_DIR
+  if [ -f start.sh ]; then
+      nohup ./start.sh &
+      echo $! > pid.txt
+  fi
 }
 
 function stop {
   echo "Stopping Mock cartridge"
+  cd $OPENSHIFT_REPO_DIR
+  if [ -f pid.txt ]; then
+      kill -KILL $(cat pid.txt)
+  fi
 }
 
 function restart {
@@ -17,11 +26,18 @@ function restart {
 }
 
 function status {
-  client_result "This is client status output from the erlang cartridge"
+  if [ -f pid.txt ]; then
+      kill -0 $(cat pid.txt)
+      return $?
+  fi
 }
 
 function build {
   echo "Building erlang cartridge"
+  cd $OPENSHIFT_REPO_DIR
+  if [ -f rebar.config ]; then
+      rebar get-deps && rebar compile
+  fi
   echo "erlang successfully built."
 }
 
