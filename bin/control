@@ -29,7 +29,7 @@ function status {
   if [ -f pid.txt ]; then
       local pid=$(cat pid.txt)
       local stat=$(ps $pid | grep $pid)
-      if [ "$stat" != "" ]
+      if [ "$stat" != "" ]; then
           return 0
       fi
   fi
