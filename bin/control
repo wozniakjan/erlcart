@@ -13,8 +13,9 @@ function start {
 }
 
 function stop {
-  echo "Stopping Mock cartridge"
+  echo "Stopping Erlang cartridge"
   cd $OPENSHIFT_REPO_DIR
+  pwd
   if [ -f pid.txt ]; then
       kill -KILL $(cat pid.txt)
   fi
@@ -30,15 +31,16 @@ function status {
       kill -0 $(cat pid.txt)
       return $?
   fi
+  return 1
 }
 
 function build {
-  echo "Building erlang cartridge"
+  echo "Building Erlang application"
   cd $OPENSHIFT_REPO_DIR
   if [ -f rebar.config ]; then
       rebar get-deps && rebar compile
   fi
-  echo "erlang successfully built."
+  echo "Application succesfully built"
 }
 
 function catchall {
