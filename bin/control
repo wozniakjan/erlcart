@@ -4,19 +4,18 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 export PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
 
 function start {
-  echo "Starting Erlang cartridge"
   cd $OPENSHIFT_REPO_DIR
   if [ -f start.sh ]; then
+      echo "Starting Erlang cartridge"
       nohup ./start.sh &
-      echo $! > pid.txt
   fi
 }
 
 function stop {
-  echo "Stopping Erlang cartridge"
   cd $OPENSHIFT_REPO_DIR
-  if [ status ]; then
-      kill $(cat pid.txt)
+  if status; then
+      echo "Stopping Erlang cartridge"
+      kill -9 $(pidof beam.smp)
   fi
 }
 
@@ -26,27 +25,26 @@ function restart {
 }
 
 function status {
-  if [ -f pid.txt ]; then
-      local pid=$(cat pid.txt)
-      local stat=$(ps $pid | grep $pid)
-      if [ "$stat" != "" ]; then
-          return 0
-      fi
+  local pid=$(pidof beam.smp)
+  if [ "$pid" != "" ]; then
+    echo "Erlang Status Running"
+    return 0
   fi
+  echo "Erlang Status Not-Running"
   return 1
 }
 
 function build {
-  echo "Building Erlang application"
   cd $OPENSHIFT_REPO_DIR
   if [ -f rebar.config ]; then
+      echo "Building Erlang application"
       rebar get-deps && rebar compile
+      echo "Application succesfully built"
   fi
-  echo "Application succesfully built"
 }
 
 function catchall {
-    echo "not yet implemented"
+  return 0
 }
 
 case "$1" in
