@@ -40,3 +40,4 @@ Scaling:
   Max: -1
 Metrics:
 - uptime
+Source-Url: https://github.com/wozniakjan/erlcart.git
