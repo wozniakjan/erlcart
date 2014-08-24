@@ -26,7 +26,7 @@ Apart from others, there are two apps running:
 1) [test](http://hello-wozj.rhcloud.com/) application from [/template/](https://github.com/wozniakjan/erlcart/tree/master/template)
 
 
-2) [camchat](#todo) HTML5 based web video conference (which is more proof of concept than actuall application, work is in progress and far from being finished, but hopefully testable)
+2) [camchat](http://camchat-wozj.rhcloud.com/) HTML5 based web video conference (which is more proof of concept than actuall application, work is in progress and far from being finished, but hopefully testable)
 
 #### That's it?
 yep.
