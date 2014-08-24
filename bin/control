@@ -16,7 +16,7 @@ function stop {
   cd $OPENSHIFT_REPO_DIR
   if status; then
       echo "Stopping Erlang cartridge"
-      kill -9 $(pidof beam.smp)
+      kill -9 $(/sbin/pidof beam.smp)
   fi
 }
 
@@ -26,7 +26,7 @@ function restart {
 }
 
 function status {
-  local pid=$(pidof beam.smp)
+  local pid=$(/sbin/pidof beam.smp)
   if [ "$pid" != "" ]; then
     echo "Erlang Status Running"
     return 0
