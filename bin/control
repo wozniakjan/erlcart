@@ -8,6 +8,7 @@ function start {
   cd $OPENSHIFT_REPO_DIR
   if [ -f start.sh ]; then
       echo "Starting Erlang cartridge"
+      #TODO: use $! to get pid and save to a file
       nohup ./start.sh &
   fi
 }
@@ -16,6 +17,7 @@ function stop {
   cd $OPENSHIFT_REPO_DIR
   if status; then
       echo "Stopping Erlang cartridge"
+      #TODO: get pid from the file abova
       kill -9 $(/sbin/pidof beam.smp)
   fi
 }
