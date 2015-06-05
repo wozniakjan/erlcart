@@ -7,7 +7,7 @@ Exhaustive documentation on www.openshift.com provides essential information for
 
 #### What this cartridge currently offers?
 
-- Erlang/OTP 17R01 - pre-build
+- Erlang/OTP 17.5.5 - pre-build
 - rebar 2.0.0 - tool for application build
 
 #### What it supports?
@@ -18,6 +18,8 @@ Currently cartridge has been tested with [Cowboy web server](https://github.com/
 
 Create the application in [OpenShift](www.openshift.com), add [manifest](https://raw.githubusercontent.com/wozniakjan/erlcart/master/metadata/manifest.yml) from this repository, clone applications repository and push your OTP application's code. The cartridge will take care of automated build and deployment. In case you are not familiar with Cowboy and web development in OTP, there is barebone app created for your convenience in
 [/template/](https://github.com/wozniakjan/erlcart/tree/master/template).
+
+    https://raw.githubusercontent.com/wozniakjan/erlcart/master/metadata/manifest.yml
 
 #### Are there any examples running around?
 
