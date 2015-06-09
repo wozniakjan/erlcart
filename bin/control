@@ -2,51 +2,65 @@
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 export PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
+pid_file="$OPENSHIFT_ERL_DIR/pid/erlang.pid"
 
-function start {
+function start() {
   build
   cd $OPENSHIFT_REPO_DIR
   if [ -f start.sh ]; then
-      echo "Starting Erlang cartridge"
-      #TODO: use $! to get pid and save to a file
+      echo "Starting $OPENSHIFT_APP_NAME"
       nohup ./start.sh &
+      ret=$?
+      npid=$!
+      if [ $ret -eq 0 ]; then
+          echo "$npid" > "$OPENSHIFT_ERL_DIR/pid/erl.pid"
+      else
+          echo "Application '$OPENSHIFT_APP_NAME' failed to start - $ret" 1>&2
+          exit $ret
+      fi
   fi
 }
 
-function stop {
+function stop() {
   cd $OPENSHIFT_REPO_DIR
   if status; then
-      echo "Stopping Erlang cartridge"
-      #TODO: get pid from the file abova
-      kill -9 $(/sbin/pidof beam.smp)
+      if [ -f $pid_file ]; then
+          npid=$( cat $pid_file 2> /dev/null )
+      fi
+
+      if [ -n "$npid" ]; then
+          echo "Stopping $OPENSHIFT_APP_NAME"
+          kill -9 "$npid"
+      fi
+      rm -f $pid_file
   fi
 }
 
-function restart {
+function restart() {
   stop
   start
 }
 
-function status {
+function status() {
   local pid=$(/sbin/pidof beam.smp)
   if [ "$pid" != "" ]; then
-    echo "Erlang Status Running"
+    echo "$OPENSHIFT_APP_NAME Running"
     return 0
   fi
-  echo "Erlang Status Not-Running"
+  echo "$OPENSHIFT_APP_NAME Not-Running"
   return 1
 }
 
-function build {
+function build() {
   cd $OPENSHIFT_REPO_DIR
   if [ -f rebar.config ]; then
-      echo "Building Erlang application"
+      echo "Building $OPENSHIFT_APP_NAME"
       rebar get-deps && rebar compile
       echo "Application succesfully built"
   fi
 }
 
-function catchall {
+function catchall() {
   return 0
 }
 
