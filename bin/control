@@ -2,7 +2,7 @@
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 export PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
-pid_file="$OPENSHIFT_ERL_DIR/pid/erlang.pid"
+pid_file="${OPENSHIFT_ERL_DIR}erlang.pid"
 
 function start() {
   build
@@ -13,7 +13,7 @@ function start() {
     ret=$?
     npid=$!
     if [ $ret -eq 0 ]; then
-      echo "$npid" > "$OPENSHIFT_ERL_DIR/pid/erl.pid"
+      echo "$npid" > "$pid_file"
     else
       echo "Application '$OPENSHIFT_APP_NAME' failed to start - $ret" 1>&2
       exit $ret
