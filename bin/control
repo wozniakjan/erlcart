@@ -5,34 +5,45 @@ export PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
 pid_file="${OPENSHIFT_ERL_DIR}erlang.pid"
 
 function start() {
+  if is_running; then
+    echo "application $OPENSHIFT_APP_NAME is already running"
+    exit 1
+  fi
   build
   cd $OPENSHIFT_REPO_DIR
   if [ -f start.sh ]; then
     echo "Starting $OPENSHIFT_APP_NAME"
-    nohup ./start.sh &
+    nohup ./start.sh
     ret=$?
-    npid=$!
     if [ $ret -eq 0 ]; then
+      npid=$(/sbin/pidof beam.smp)
       echo "$npid" > "$pid_file"
     else
-      echo "Application '$OPENSHIFT_APP_NAME' failed to start - $ret" 1>&2
+      echo "application $OPENSHIFT_APP_NAME failed to start - $ret" 1>&2
       exit $ret
     fi
   fi
+  echo "started $OPENSHIFT_APP_NAME"
 }
 
 function stop() {
+  echo "stopping $OPENSHIFT_APP_NAME application"
   cd $OPENSHIFT_REPO_DIR
-  if status; then
-    if [ -f $pid_file ]; then
-      npid=$(cat $pid_file 2> /dev/null)
-    fi
+  if [ -f $pid_file ]; then
+    npid=$(cat $pid_file 2> /dev/null)
     if [ -n "$npid" ]; then
-      echo "Stopping $OPENSHIFT_APP_NAME"
-      kill -9 "$npid"
+      echo "stopping $OPENSHIFT_APP_NAME"
+      kill "$npid"
     fi
-    rm -f $pid_file
+  else
+    npid=$(/sbin/pidof beam.smp)
+    if [ -n "$npid" ]; then
+      echo "stopping erlang application"
+      kill "$npid"
+    fi
   fi
+  echo "$OPENSHIFT_APP_NAME application stopped"
+  rm -f $pid_file
 }
 
 function restart() {
@@ -40,24 +51,31 @@ function restart() {
   start
 }
 
-function status() {
+function is_running() {
   if [ -f $pid_file ]; then
     npid=$(cat $pid_file 2> /dev/null)
     if [ `ps --no-heading --pid $npid | wc -l` -gt 0 ] ; then
-      echo "$OPENSHIFT_APP_NAME Running"
       return 0
     fi
   fi
-  echo "$OPENSHIFT_APP_NAME Not-Running"
+  return 1
+}
+
+function status() {
+  if is_running; then
+      echo "$OPENSHIFT_APP_NAME running"
+      return 0
+  fi
+  echo "$OPENSHIFT_APP_NAME not-running"
   return 1
 }
 
 function build() {
   cd $OPENSHIFT_REPO_DIR
   if [ -f rebar.config ]; then
-    echo "Building $OPENSHIFT_APP_NAME"
+    echo "building $OPENSHIFT_APP_NAME"
     rebar get-deps && rebar compile
-    echo "Application succesfully built"
+    echo "application succesfully built"
   fi
 }
 
