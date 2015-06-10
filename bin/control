@@ -8,31 +8,30 @@ function start() {
   build
   cd $OPENSHIFT_REPO_DIR
   if [ -f start.sh ]; then
-      echo "Starting $OPENSHIFT_APP_NAME"
-      nohup ./start.sh &
-      ret=$?
-      npid=$!
-      if [ $ret -eq 0 ]; then
-          echo "$npid" > "$OPENSHIFT_ERL_DIR/pid/erl.pid"
-      else
-          echo "Application '$OPENSHIFT_APP_NAME' failed to start - $ret" 1>&2
-          exit $ret
-      fi
+    echo "Starting $OPENSHIFT_APP_NAME"
+    nohup ./start.sh &
+    ret=$?
+    npid=$!
+    if [ $ret -eq 0 ]; then
+      echo "$npid" > "$OPENSHIFT_ERL_DIR/pid/erl.pid"
+    else
+      echo "Application '$OPENSHIFT_APP_NAME' failed to start - $ret" 1>&2
+      exit $ret
+    fi
   fi
 }
 
 function stop() {
   cd $OPENSHIFT_REPO_DIR
   if status; then
-      if [ -f $pid_file ]; then
-          npid=$( cat $pid_file 2> /dev/null )
-      fi
-
-      if [ -n "$npid" ]; then
-          echo "Stopping $OPENSHIFT_APP_NAME"
-          kill -9 "$npid"
-      fi
-      rm -f $pid_file
+    if [ -f $pid_file ]; then
+      npid=$(cat $pid_file 2> /dev/null)
+    fi
+    if [ -n "$npid" ]; then
+      echo "Stopping $OPENSHIFT_APP_NAME"
+      kill -9 "$npid"
+    fi
+    rm -f $pid_file
   fi
 }
 
@@ -42,10 +41,12 @@ function restart() {
 }
 
 function status() {
-  local pid=$(/sbin/pidof beam.smp)
-  if [ "$pid" != "" ]; then
-    echo "$OPENSHIFT_APP_NAME Running"
-    return 0
+  if [ -f $pid_file ]; then
+    npid=$(cat $pid_file 2> /dev/null)
+    if [ `ps --no-heading --pid $npid | wc -l` -gt 0 ] ; then
+      echo "$OPENSHIFT_APP_NAME Running"
+      return 0
+    fi
   fi
   echo "$OPENSHIFT_APP_NAME Not-Running"
   return 1
@@ -54,9 +55,9 @@ function status() {
 function build() {
   cd $OPENSHIFT_REPO_DIR
   if [ -f rebar.config ]; then
-      echo "Building $OPENSHIFT_APP_NAME"
-      rebar get-deps && rebar compile
-      echo "Application succesfully built"
+    echo "Building $OPENSHIFT_APP_NAME"
+    rebar get-deps && rebar compile
+    echo "Application succesfully built"
   fi
 }
 
