@@ -8,7 +8,7 @@ Exhaustive documentation on www.openshift.com provides essential information for
 #### What this cartridge currently offers?
 
 - Erlang/OTP 17.5.5 - pre-build
-- rebar 2.0.0 - tool for application build
+- rebar 2.5.1 - tool for application build
 
 #### What it supports?
 
