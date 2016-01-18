@@ -1,7 +1,15 @@
 #!/bin/bash -e
 
-cd $OPENSHIFT_ERL_DIR/usr
+DIR="$OPENSHIFT_ERL_DIR/usr"
+
+cd "$DIR"
 unzip erlang.zip
-./Install $OPENSHIFT_ERL_DIR/usr
+
+cd erlang
+./Install "$DIR"/erlang
+cd ..
+
+cp --symbolic-link "$DIR"/erlang/bin/* "$DIR"/bin/
+cp --symbolic-link "$DIR"/elixir/bin/* "$DIR"/bin/
 
 exit 0
