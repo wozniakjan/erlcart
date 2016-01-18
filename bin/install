@@ -1,9 +1,7 @@
 #!/bin/bash -e
 
 cd $OPENSHIFT_ERL_DIR/usr
-tar -xf erlang.tar.gz
-mv release/* .
-rm -rf release
+unzip erlang.zip
 ./Install $OPENSHIFT_ERL_DIR/usr
 
 exit 0
