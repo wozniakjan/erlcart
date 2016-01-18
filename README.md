@@ -9,6 +9,7 @@ Exhaustive documentation on www.openshift.com provides essential information for
 
 - Erlang/OTP 18.2.1 - pre-build
 - rebar & rebar3 - tool for application build
+- elixir v1.2
 
 #### What it supports?
 
