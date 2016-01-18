@@ -5,13 +5,13 @@ Description: erlang cartridge usable with Cowboy webserver
 Version: '0.1'
 License: ASL 2.0
 Vendor: redhat
-Cartridge-Version: 0.0.1
+Cartridge-Version: 0.0.2
 Cartridge-Vendor: wj 
 Categories:
 - service
 - web_framework
 Provides:
-- erlang v17r1
+- erlang v17.5.5
 - rebar
 Cart-Data:
 - Key: OPENSHIFT_ERLANG_EXAMPLE
