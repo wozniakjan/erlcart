@@ -2,9 +2,9 @@
 
 #TODO: read following link and use here http://mywiki.wooledge.org/ProcessManagement
 
-source $OPENSHIFT_CARTRIDGE_SDK_BASH
-export PATH=$OPENSHIFT_ERL_DIR/usr/bin/:$PATH
-pid_file="${OPENSHIFT_ERL_DIR}erlang.pid"
+source "$OPENSHIFT_CARTRIDGE_SDK_BASH"
+export PATH="$OPENSHIFT_ERL_DIR/usr/bin/:$PATH"
+pid_file="${OPENSHIFT_ERL_DIR}/erlang.pid"
 
 function start() {
   if is_running; then
@@ -12,17 +12,17 @@ function start() {
     exit 1
   fi
   build
-  cd $OPENSHIFT_REPO_DIR
+  cd "$OPENSHIFT_REPO_DIR"
   if [ -f start.sh ]; then
     echo "Starting $OPENSHIFT_APP_NAME"
     nohup ./start.sh
-    ret=$?
-    if [ $ret -eq 0 ]; then
+    ret="$?"
+    if [ "$ret" -eq 0 ]; then
       npid=$(/sbin/pidof beam.smp)
       echo "$npid" > "$pid_file"
     else
       echo "application $OPENSHIFT_APP_NAME failed to start - $ret" 1>&2
-      exit $ret
+      exit "$ret"
     fi
   fi
   echo "started $OPENSHIFT_APP_NAME"
@@ -30,9 +30,9 @@ function start() {
 
 function stop() {
   echo "stopping $OPENSHIFT_APP_NAME application"
-  cd $OPENSHIFT_REPO_DIR
-  if [ -f $pid_file ]; then
-    npid=$(cat $pid_file 2> /dev/null)
+  cd "$OPENSHIFT_REPO_DIR"
+  if [ -f "$pid_file" ]; then
+    npid=$(cat "$pid_file" 2> /dev/null)
     if [ -n "$npid" ]; then
       echo "stopping $OPENSHIFT_APP_NAME"
       kill "$npid"
@@ -45,7 +45,7 @@ function stop() {
     fi
   fi
   echo "$OPENSHIFT_APP_NAME application stopped"
-  rm -f $pid_file
+  rm -f "$pid_file"
 }
 
 function restart() {
@@ -54,9 +54,9 @@ function restart() {
 }
 
 function is_running() {
-  if [ -f $pid_file ]; then
-    npid=$(cat $pid_file 2> /dev/null)
-    if [ `ps --no-heading --pid $npid | wc -l` -gt 0 ] ; then
+  if [ -f "$pid_file" ]; then
+    npid=$(cat "$pid_file" 2> /dev/null)
+    if [ `ps --no-heading --pid "$npid" | wc -l` -gt 0 ] ; then
       return 0
     fi
   fi
@@ -73,7 +73,7 @@ function status() {
 }
 
 function build() {
-  cd $OPENSHIFT_REPO_DIR
+  cd "$OPENSHIFT_REPO_DIR"
   if [ -f rebar.config ]; then
     echo "building $OPENSHIFT_APP_NAME"
     rebar get-deps && rebar compile
