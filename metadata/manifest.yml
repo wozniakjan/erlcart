@@ -1,3 +1,4 @@
+#TODO: use git://github.com/<user>/<project>.git#<branch> syntax to separate erl and erl+elx cartridge in source-url
 Name: erlang
 Cartridge-Short-Name: ERL
 Display-Name: Erlang Cartridge
