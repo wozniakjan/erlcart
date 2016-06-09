@@ -9,6 +9,8 @@ cd erlang
 ./Install "$DIR"/erlang
 cd ..
 
+export MIX_ARCHIVES="$OPENSHIFT_ERL_DIR/mix"
+
 cp --symbolic-link "$DIR"/erlang/bin/* "$DIR"/bin/
 cp --symbolic-link "$DIR"/elixir/bin/* "$DIR"/bin/
 
