@@ -1,0 +1,73 @@
+% This is an -*- erlang -*- file.
+%% %CopyrightBegin%
+%%
+%% Copyright Ericsson AB 2009-2014. All Rights Reserved.
+%%
+%% Licensed under the Apache License, Version 2.0 (the "License");
+%% you may not use this file except in compliance with the License.
+%% You may obtain a copy of the License at
+%%
+%%     http://www.apache.org/licenses/LICENSE-2.0
+%%
+%% Unless required by applicable law or agreed to in writing, software
+%% distributed under the License is distributed on an "AS IS" BASIS,
+%% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%% See the License for the specific language governing permissions and
+%% limitations under the License.
+%%
+%% %CopyrightEnd%
+
+{application, common_test,
+ [{description, "The OTP Common Test application"},
+  {vsn, "1.11.1"},
+  {modules, [ct_cover,
+	     ct,
+	     ct_event,
+	     ct_framework,
+	     ct_ftp,
+	     ct_gen_conn,
+             ct_hooks,
+             ct_hooks_lock,
+	     ct_logs,
+	     ct_make,
+	     ct_master,
+	     ct_master_event,
+	     ct_master_logs,
+	     ct_master_status,
+	     ct_netconfc,
+	     ct_conn_log_h,
+	     ct_repeat,
+	     ct_rpc,
+	     ct_run,
+	     ct_snmp,
+	     ct_ssh,
+	     ct_telnet_client,
+	     ct_telnet,
+	     ct_testspec,
+	     ct_util,
+	     unix_telnet,
+	     vts,
+	     ct_config,
+	     ct_config_plain,
+	     ct_config_xml,
+	     ct_slave,
+             cth_log_redirect,
+	     cth_conn_log,
+             cth_surefire
+	    ]},
+  {registered, [ct_logs,
+		ct_util_server,
+		ct_config_server,
+		ct_make_ref,
+		vts,
+		ct_master,
+		ct_master_logs]},
+  {applications, [kernel,stdlib]},
+  {env, []},
+  {runtime_dependencies,["xmerl-1.3.8","tools-2.8",
+			 "test_server-3.9","stdlib-2.5","ssh-4.0",
+			 "snmp-5.1.2","sasl-2.4.2","runtime_tools-1.8.16",
+			 "kernel-4.0","inets-6.0","erts-7.0",
+			 "debugger-4.1","crypto-3.6","compiler-6.0",
+			 "observer-2.1"]}]}.
+

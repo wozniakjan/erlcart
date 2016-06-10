@@ -1,0 +1,5 @@
+[{release,"Erlang/OTP","18","7.2.1",
+          [{kernel,"4.1.1","/var/lib/openshift/556f9860e0b8cdaf36000016/diy/release/lib/kernel-4.1.1"},
+           {stdlib,"2.7","/var/lib/openshift/556f9860e0b8cdaf36000016/diy/release/lib/stdlib-2.7"},
+           {sasl,"2.6.1","/var/lib/openshift/556f9860e0b8cdaf36000016/diy/release/lib/sasl-2.6.1"}],
+          permanent}].
