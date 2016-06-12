@@ -1,1 +1,0 @@
--record(r, {cell=undefined}).
