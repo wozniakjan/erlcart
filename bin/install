@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 DIR="$OPENSHIFT_ERL_DIR/usr"
+export PATH="$OPENSHIFT_ERL_DIR/usr/bin/:$PATH"
 
 cd "$DIR"
 unzip erlang.zip
@@ -13,5 +14,10 @@ export MIX_ARCHIVES="$OPENSHIFT_ERL_DIR/mix"
 
 cp --symbolic-link "$DIR"/erlang/bin/* "$DIR"/bin/
 cp --symbolic-link "$DIR"/elixir/bin/* "$DIR"/bin/
+
+cd ..
+mkdir mix
+cd mix
+mix local.hex
 
 exit 0
