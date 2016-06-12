@@ -17,12 +17,9 @@ function start() {
   if [ -f start.sh ]; then
     echo "Starting $OPENSHIFT_APP_NAME"
     cd web/
-    nohup mix phoenix.server &
+    elixir --detached -e "File.write! '$pid_file', :os.getpid" -S mix phoenix.server
     ret=$?
-    npid=$!
-    if [ "$ret" -eq 0 ]; then
-      echo "$npid" > "$pid_file"
-    else
+    if [ ! "$ret" -eq 0 ]; then
       echo "application $OPENSHIFT_APP_NAME failed to start - $ret" 1>&2
       exit "$ret"
     fi
