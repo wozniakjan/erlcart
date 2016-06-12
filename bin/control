@@ -4,7 +4,8 @@
 
 source "$OPENSHIFT_CARTRIDGE_SDK_BASH"
 export PATH="$OPENSHIFT_ERL_DIR/usr/bin/:$PATH"
-pid_file="${OPENSHIFT_ERL_DIR}/erlang.pid"
+export pid_file="${OPENSHIFT_ERL_DIR}/erlang.pid"
+export MIX_ARCHIVES="$OPENSHIFT_ERL_DIR/mix"
 
 function start() {
   if is_running; then
@@ -15,10 +16,11 @@ function start() {
   cd "$OPENSHIFT_REPO_DIR"
   if [ -f start.sh ]; then
     echo "Starting $OPENSHIFT_APP_NAME"
-    nohup ./start.sh
-    ret="$?"
+    cd web/
+    nohup mix phoenix.server &
+    ret=$?
+    npid=$!
     if [ "$ret" -eq 0 ]; then
-      npid=$(/sbin/pidof beam.smp)
       echo "$npid" > "$pid_file"
     else
       echo "application $OPENSHIFT_APP_NAME failed to start - $ret" 1>&2
@@ -40,7 +42,7 @@ function stop() {
   else
     npid=$(/sbin/pidof beam.smp)
     if [ -n "$npid" ]; then
-      echo "stopping erlang application"
+      echo "stopping $OPENSHIFT_APP_NAME application"
       kill "$npid"
     fi
   fi
@@ -74,11 +76,8 @@ function status() {
 
 function build() {
   cd "$OPENSHIFT_REPO_DIR"
-  if [ -f rebar.config ]; then
-    echo "building $OPENSHIFT_APP_NAME"
-    rebar get-deps && rebar compile
-    echo "application succesfully built"
-  fi
+  echo "building $OPENSHIFT_APP_NAME"
+  echo "elixir & mix builds app on startup"
 }
 
 function catchall() {
