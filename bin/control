@@ -34,8 +34,10 @@ function stop() {
   if [ -f "$pid_file" ]; then
     npid=$(cat "$pid_file" 2> /dev/null)
     if [ -n "$npid" ]; then
-      echo "stopping $OPENSHIFT_APP_NAME"
-      kill "$npid"
+      if [ `ps --no-heading --pid "$npid" | wc -l` -gt 0 ] ; then
+        echo "stopping $OPENSHIFT_APP_NAME"
+        kill "$npid"
+      fi
     fi
   else
     npid=$(/sbin/pidof beam.smp)
