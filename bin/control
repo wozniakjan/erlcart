@@ -12,12 +12,9 @@ function start() {
     echo "application $OPENSHIFT_APP_NAME is already running"
     exit 1
   fi
-  build
-  cd "$OPENSHIFT_REPO_DIR"
-  echo `pwd`
+  cd "$OPENSHIFT_REPO_DIR"/web
   echo "Starting $OPENSHIFT_APP_NAME"
-  cd web/
-  echo `pwd`
+  build
   #elixir --detached -e "File.write! '$pid_file', :os.getpid" -S mix phoenix.server
   ret=$?
   if [ ! "$ret" -eq 0 ]; then
@@ -72,7 +69,7 @@ function status() {
 }
 
 function build() {
-  cd "$OPENSHIFT_REPO_DIR"
+  cd "$OPENSHIFT_REPO_DIR"/web
   echo "building $OPENSHIFT_APP_NAME"
   #yes | mix deps.get
 }

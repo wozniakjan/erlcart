@@ -6,7 +6,7 @@ cd "$DIR"
 unzip erlang.zip
 
 cd erlang
-./Install "$DIR"/erlang
+yes "n" | ./Install "$DIR"/erlang
 cd ..
 
 export MIX_ARCHIVES="$OPENSHIFT_ERL_DIR/mix"
