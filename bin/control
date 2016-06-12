@@ -14,8 +14,7 @@ function start() {
   fi
   cd "$OPENSHIFT_REPO_DIR"/web
   echo "Starting $OPENSHIFT_APP_NAME"
-  build
-  #elixir --detached -e "File.write! '$pid_file', :os.getpid" -S mix phoenix.server
+  elixir --detached -e "File.write! '$pid_file', :os.getpid" -S mix phoenix.server
   ret=$?
   if [ ! "$ret" -eq 0 ]; then
     echo "application $OPENSHIFT_APP_NAME failed to start - $ret" 1>&2
@@ -70,8 +69,7 @@ function status() {
 
 function build() {
   cd "$OPENSHIFT_REPO_DIR"/web
-  echo "building $OPENSHIFT_APP_NAME"
-  #yes | mix deps.get
+  echo "building $OPENSHIFT_APP_NAME happens for phoenix during startup"
 }
 
 function catchall() {
