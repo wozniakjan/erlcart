@@ -14,15 +14,16 @@ function start() {
   fi
   build
   cd "$OPENSHIFT_REPO_DIR"
-  if [ -f start.sh ]; then
-    echo "Starting $OPENSHIFT_APP_NAME"
-    cd web/
-    elixir --detached -e "File.write! '$pid_file', :os.getpid" -S mix phoenix.server
-    ret=$?
-    if [ ! "$ret" -eq 0 ]; then
-      echo "application $OPENSHIFT_APP_NAME failed to start - $ret" 1>&2
-      exit "$ret"
-    fi
+  echo `pwd`
+  echo "Starting $OPENSHIFT_APP_NAME"
+  cd web/
+  echo `pwd`
+  mix phoenix.server
+  elixir --detached -e "File.write! '$pid_file', :os.getpid" -S mix phoenix.server
+  ret=$?
+  if [ ! "$ret" -eq 0 ]; then
+    echo "application $OPENSHIFT_APP_NAME failed to start - $ret" 1>&2
+    exit "$ret"
   fi
   echo "started $OPENSHIFT_APP_NAME"
 }
@@ -74,7 +75,7 @@ function status() {
 function build() {
   cd "$OPENSHIFT_REPO_DIR"
   echo "building $OPENSHIFT_APP_NAME"
-  echo "elixir & mix builds app on startup"
+  yes | mix deps.get
 }
 
 function catchall() {
