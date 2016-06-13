@@ -1,0 +1,13 @@
+{application,web,
+             [{registered,[]},
+              {description,"web"},
+              {vsn,"0.0.1"},
+              {modules,['Elixir.Web','Elixir.Web.Endpoint',
+                        'Elixir.Web.ErrorHelpers','Elixir.Web.ErrorView',
+                        'Elixir.Web.Gettext','Elixir.Web.LayoutView',
+                        'Elixir.Web.PageController','Elixir.Web.PageView',
+                        'Elixir.Web.Router','Elixir.Web.Router.Helpers',
+                        'Elixir.Web.UserSocket','Elixir.Web.Web']},
+              {mod,{'Elixir.Web',[]}},
+              {applications,[kernel,stdlib,elixir,phoenix,phoenix_html,cowboy,
+                             logger,gettext]}]}.
