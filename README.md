@@ -7,9 +7,9 @@ Exhaustive documentation on www.openshift.com provides essential information for
 
 #### What this cartridge currently offers?
 
-- Erlang/OTP 18.2.1 - pre-build
+- Erlang/OTP 18.3.3 - pre-build
 - rebar & rebar3 - tool for application build
-- elixir v1.2
+- elixir v1.2.6
 
 #### What it supports?
 
@@ -24,12 +24,4 @@ Create the application in [OpenShift](www.openshift.com), add [manifest](https:/
 
 #### Are there any examples running around?
 
-Apart from others, there are two apps running:
-
-1) [test](http://hello-wozj.rhcloud.com/) application from [/template/](https://github.com/wozniakjan/erlcart/tree/cowboy/template)
-
-
-2) [camchat](https://camchat.herokuapp.com/) HTML5 based web video conference (which is more proof of concept than actuall application, work is in progress and far from being finished, but hopefully testable)
-
-#### That's it?
-yep.
+[test](http://hello-wozj.rhcloud.com/) application from [/template/](https://github.com/wozniakjan/erlcart/tree/cowboy/template)
