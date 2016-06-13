@@ -6,6 +6,7 @@ source "$OPENSHIFT_CARTRIDGE_SDK_BASH"
 export PATH="$OPENSHIFT_ERL_DIR/usr/bin/:$PATH"
 export pid_file="${OPENSHIFT_ERL_DIR}/erlang.pid"
 export MIX_ARCHIVES="$OPENSHIFT_ERL_DIR/mix"
+export TMOUT=28800
 
 function start() {
   if is_running; then
