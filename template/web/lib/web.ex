@@ -6,6 +6,11 @@ defmodule Web do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
+    init = :os.getenv("OPENSHIFT_ERL_INIT")
+    if String.length(init) != 0 do
+        System.halt(0)
+    end
+
     children = [
       # Start the endpoint when the application starts
       supervisor(Web.Endpoint, []),
