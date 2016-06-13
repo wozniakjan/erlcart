@@ -14,6 +14,7 @@ function start() {
   fi
   cd "$OPENSHIFT_REPO_DIR"/web
   echo "Starting $OPENSHIFT_APP_NAME"
+  build
   export OPENSHIFT_ERL_INIT=""
   elixir --detached -e "File.write! '$pid_file', :os.getpid" -S mix phoenix.server
   ret=$?
