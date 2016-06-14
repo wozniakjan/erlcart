@@ -1,5 +1,5 @@
-erlcart
-=======
+erlcart feat. cowboy
+====================
 
 This effort aims to create convenient support for Erlang web server for redhat's OpenShift. Development is easier due to OpenShift's scaling, automated builds and deployment but also limits the structure and usage of application.
 
