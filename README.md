@@ -15,10 +15,17 @@ Create the application in [OpenShift](www.openshift.com), add [manifest](https:/
 
     rhc create-app erlapp https://raw.githubusercontent.com/wozniakjan/erlcart/phoenix/metadata/manifest.yml
 
-- then ssh to your app
-- try to build the app few times
-- restart the app
+Then ssh to your app and execute until succeeds, you will get timed out a couple of times:
+
+    cd erlang/bin
+    ./control build
+
+After the app is finally rebuilt, execute
+
+    cd erlang/bin
+    ./control stop
+    ./control start
 
 #### Are there any examples running around?
 
-soon will be
+[Phoenix demo](http://phoenix-wozj.rhcloud.com/) from the [template](https://github.com/wozniakjan/erlcart/tree/phoenix/template)
