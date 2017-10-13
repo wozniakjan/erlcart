@@ -1,3 +1,5 @@
+**This is OpenShift2 cartridge, it is not compatible with OpenShift3**
+
 erlcart
 =======
 
